@@ -2,7 +2,6 @@ package ToopherAPI;
 use strict;
 use warnings;
 
-use Try::Tiny;
 use Net::OAuth::ConsumerRequest;
 use HTTP::Request::Common qw{ GET POST };
 use JSON qw{ decode_json };
@@ -227,11 +226,9 @@ sub request
   }
 
   my $jsonObj;
-  try {
+  eval {
     $jsonObj = decode_json($response->content);
-  } catch {
-    die "Error decoding JSON response: " . $_;
-  };
+  } or die "Error decoding JSON response: " . $@;
 
   return $jsonObj;
 }
@@ -241,9 +238,9 @@ sub _parse_request_error
   my ($response) = @_;
   if ($response->content) {
     my $errObj = 0;
-    try {
+    eval {
       $errObj = decode_json($response->content);
-    } catch {};
+    };
     if ($errObj) {
       if($errObj->{'error_code'} == ERROR_CODE_USER_DISABLED) {
         die ERROR_USER_DISABLED;

@@ -84,14 +84,14 @@ try {
 To install dependencies necessary to use this module:
 
 ```shell
-cpan install Try::Tiny HTTP::Request::Common JSON LWP::UserAgent LWP::Protocol::https Net::OAuth::ConsumerRequest Class::Struct URI::Escape
+cpan install HTTP::Request::Common JSON LWP::UserAgent LWP::Protocol::https Net::OAuth::ConsumerRequest Class::Struct URI::Escape
 ```
 
 #### Tests
 Install the test dependencies:
 
 ```shell
-$ cpan install HTTP::Response Test::More URI URL::Encode
+$ cpan install Try::Tiny HTTP::Response Test::More URI URL::Encode
 ```
 
 To execute the tests:
