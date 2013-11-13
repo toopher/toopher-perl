@@ -3,7 +3,6 @@
 use ToopherAPI;
 use Try::Tiny;
 use Test::More;
-use Data::Dumper;
 
 use constant TRUE => 1;
 use constant FALSE => 0;
