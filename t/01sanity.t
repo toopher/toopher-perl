@@ -165,7 +165,7 @@ subtest 'unknown user raises correct error' => sub {
     my $auth_request = $api->authenticate_by_user_name('some unknown user', 'some random string');
     fail('Should have died before here');
   } catch {
-    is($_, ToopherAPI::ERROR_UNKNOWN_USER);
+    is($_, ToopherAPI::ERROR_USER_UNKNOWN);
   };
 };
 
@@ -176,7 +176,7 @@ subtest 'unknown terminal raises correct error' => sub {
     my $auth_request = $api->authenticate_by_user_name('some unknown user', 'some random string');
     fail('Should have died before here');
   } catch {
-    is($_, ToopherAPI::ERROR_UNKNOWN_TERMINAL);
+    is($_, ToopherAPI::ERROR_TERMINAL_UNKNOWN);
   };
 };
 

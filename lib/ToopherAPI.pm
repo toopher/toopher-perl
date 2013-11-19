@@ -10,11 +10,11 @@ use Class::Struct;
 use URI::Escape;
 use constant DEFAULT_TOOPHER_API => 'https://api.toopher.com/v1/';
 use constant ERROR_CODE_USER_DISABLED => 704;
-use constant ERROR_CODE_UNKNOWN_USER => 705;
-use constant ERROR_CODE_UNKNOWN_TERMINAL => 706;
+use constant ERROR_CODE_USER_UNKNOWN => 705;
+use constant ERROR_CODE_TERMINAL_UNKNOWN => 706;
 use constant ERROR_USER_DISABLED => "The specified user has disabled Toopher Authentication\n";
-use constant ERROR_UNKNOWN_USER => "No matching user exists\n";
-use constant ERROR_UNKNOWN_TERMINAL => "No matching terminal exists\n";
+use constant ERROR_USER_UNKNOWN => "No matching user exists\n";
+use constant ERROR_TERMINAL_UNKNOWN => "No matching terminal exists\n";
 use constant ERROR_PAIRING_DEACTIVATED => "Pairing has been deactivated\n";
 
 sub base_log{
@@ -96,7 +96,7 @@ sub get_authentication_status_with_otp
   return _authenticationStatusFromJson($self->post('authentication_requests/' . $authentication_request_id . '/otp_auth', $params));
 }
 
-sub assign_user_friendly_name_to_terminal
+sub create_user_terminal
 {
   my ($self, $user_name, $terminal_name, $terminal_name_extra) = @_;
   my $params = {
@@ -244,10 +244,10 @@ sub _parse_request_error
     if ($errObj) {
       if($errObj->{'error_code'} == ERROR_CODE_USER_DISABLED) {
         die ERROR_USER_DISABLED;
-      } elsif ($errObj->{'error_code'} == ERROR_CODE_UNKNOWN_USER) {
-        die ERROR_UNKNOWN_USER;
-      } elsif ($errObj->{'error_code'} == ERROR_CODE_UNKNOWN_TERMINAL) {
-        die ERROR_UNKNOWN_TERMINAL;
+      } elsif ($errObj->{'error_code'} == ERROR_CODE_USER_UNKNOWN) {
+        die ERROR_USER_UNKNOWN;
+      } elsif ($errObj->{'error_code'} == ERROR_CODE_TERMINAL_UNKNOWN) {
+        die ERROR_TERMINAL_UNKNOWN;
       } else {
         if (($errObj->{'error_message'} =~ /pairing has been deactivated/i)
             || ($errObj->{'error_message'} =~ /pairing has not been authorized/i)) {
