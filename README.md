@@ -62,14 +62,14 @@ try {
   # there are four distinct errors ToopherAPI can return if it needs more data
   if ($_ == ToopherAPI::ERROR_USER_DISABLED) {
     # you have marked this user as disabled in the Toopher API.
-  } elsif ($_ == ToopherAPI::ERROR_UNKNOWN_USER) {
+  } elsif ($_ == ToopherAPI::ERROR_USER_UNKNOWN) {
     # This user has not yet paired a mobile device with their account.  Pair them
     # using $api->pair() as described above, then re-try authentication
-  } elsif ($_ == ToopherAPI::ERROR_UNKNOWN_TERMINAL) {
+  } elsif ($_ == ToopherAPI::ERROR_TERMINAL_UNKNOWN) {
     # This user has not assigned a "Friendly Name" to this terminal identifier.
     # Prompt them to enter a terminal name, then submit that "friendly name" to
     # the Toopher API:
-    #   $api->assign_user_friendly_name_to_terminal($user_name, $terminal_friendly_name, $terminal_identifier);
+    #   $api->create_user_terminal($user_name, $terminal_friendly_name, $terminal_identifier);
     # Afterwards, re-try authentication
   } elsif ($_ == ToopherAPI::ERROR_PAIRING_DEACTIVATED) {
     # this user does not have an active pairing,
