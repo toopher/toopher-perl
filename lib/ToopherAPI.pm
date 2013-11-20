@@ -8,6 +8,7 @@ use JSON qw{ decode_json };
 use LWP::UserAgent;
 use Class::Struct;
 use URI::Escape;
+use constant VERSION => "1.1.0";
 use constant DEFAULT_TOOPHER_API => 'https://api.toopher.com/v1/';
 use constant ERROR_CODE_USER_DISABLED => 704;
 use constant ERROR_CODE_USER_UNKNOWN => 705;
@@ -219,6 +220,7 @@ sub request
   $oaRequest->sign;
 
   $req->header('Authorization' => $oaRequest->to_authorization_header);
+  $req->header('User-Agent' => "toopher-perl/" . VERSION . " (perl " . $] . " on " . $^O . ")");
   my $response = $self->{_ua}->request($req);
 
   if ($response->code >= 300) {
