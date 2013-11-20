@@ -48,6 +48,13 @@ my $ua = eval {
 
 my $api = new ToopherAPI(key => 'foo', secret => 'bar', ua => $ua);
 
+subtest 'test version UA string' => sub {
+  $ua->response->code(200);
+  $ua->response->content('{"id":"1", "enabled":true, "user":{"id":"1","name":"some user"}}');
+  $api->pair('awkward turtle', 'some user');
+  is($ua->request->header('User-Agent'), "toopher-perl/" . ToopherAPI::VERSION . " (perl " . $] . " on " . $^O . ")");
+};
+
 subtest 'create pairing' => sub {
   $ua->response->code(200);
   $ua->response->content('{"id":"1", "enabled":true, "user":{"id":"1","name":"some user"}}');
