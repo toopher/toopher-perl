@@ -11,6 +11,7 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::More' => 0,
         'Test::Exception' => 0,
+        'Devel::Cover::Report::Coveralls' => 0,
         'HTTP::Request::Common' => 0,
         'JSON' => 0,
         'LWP::UserAgent' => 0,
