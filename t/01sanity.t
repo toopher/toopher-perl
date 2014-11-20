@@ -64,6 +64,15 @@ subtest 'create pairing' => sub {
   is($pairing->id, '1');
 };
 
+subtest 'create sms pairing' => sub {
+  $ua->response->code(200);
+  $ua->response->content('{"id":"1", "enabled":true, "user":{"id":"1","name":"some user"}}');
+  my $pairing = $api->pair_sms('1234', 'some user');
+  is($ua->request->method, 'POST');
+  is($ua->request->{'post_data'}->{'phone_number'}, '1234');
+  is($pairing->id, '1');
+};
+
 subtest 'pairing status' => sub {
   $ua->response->content('{"id":"1", "enabled":true, "user":{"id":"1","name":"some user"}}');
   my $pairing = $api->get_pairing_status('1');
