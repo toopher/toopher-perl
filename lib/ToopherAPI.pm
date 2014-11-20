@@ -57,6 +57,17 @@ sub pair
   $params->{'user_name'} = $user_name;
   return _pairingStatusFromJson($self->post('pairings/create', $params));
 }
+
+sub pair_sms
+{
+  my($self, $phone_number, $user_name, $phone_country, $extras) = @_;
+  my $params = $extras || {};
+  $params->{'phone_number'} = $phone_number;
+  $params->{'user_name'} = $user_name;
+  $params->{'phone_country'} = $phone_country if $phone_country;
+  return _pairingStatusFromJson($self->post('pairings/create/sms', $params));
+}
+
 sub get_pairing_status
 {
   my($self, $pairing_request_id) = @_;
