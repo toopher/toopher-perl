@@ -43,7 +43,7 @@ sub new
     _ua => $ua,
     _key => $args{'key'},
     _secret => $args{'secret'},
-  }; 
+  };
 
   bless $self, $class;
   return $self;
