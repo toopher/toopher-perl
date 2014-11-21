@@ -1,5 +1,8 @@
 # ToopherAPI Perl Client
 
+#### Perl Version
+>= 5.0.0
+
 #### Installing Dependencies
 Toopher uses [CPAN](http://www.cpan.org/).
 
