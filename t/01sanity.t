@@ -13,7 +13,8 @@ my $ua = eval {
   use HTTP::Response;
   use URI;
   use URL::Encode qw ( url_params_mixed );
-  sub new {
+  sub new
+  {
     my ($class) = @_;
     my $self = {
       '_response' => new HTTP::Response(200),
@@ -42,8 +43,6 @@ my $ua = eval {
   }
   __PACKAGE__;
 }->new($code, $message);
-
-
 
 
 my $api = new ToopherAPI(key => 'foo', secret => 'bar', ua => $ua);
@@ -98,7 +97,6 @@ subtest 'authenticate with otp' => sub {
   is($ua->request->method, 'POST');
   is($ua->request->{'post_data'}->{'otp'}, '123456');
 };
-
 
 subtest 'authentication status' => sub {
   $ua->response->content('{"id":"1", "pending":false, "granted":true, "automated":false, "reason":"its a test", "terminal":{"id":"1", "name":"test terminal"}}');
@@ -210,5 +208,3 @@ subtest 'unauthorized pairing raises correct error' => sub {
 };
 
 done_testing();
-
-# vim: ts=2:sw=2:expandtab:autoindent

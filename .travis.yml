@@ -1,0 +1,5 @@
+language: perl
+perl:
+  - "5.16"
+script:
+  perl Build.PL && ./Build build && cover -test -report coveralls
